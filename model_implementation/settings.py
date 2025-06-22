@@ -23,9 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-g-9aikjb#t1&7&anyj2qpak8&b$$hdg*#lz=d@_*yk!!z=4y^-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '.railway.app',  # For Railway domain
+]
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -79,6 +83,13 @@ DATABASES = {
     }
 }
 
+# CSRF_TRUSTED_ORIGINS = ['https://*.railway.app']
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+    'https://*.railway.app',
+]
+CORS_ALLOW_CREDENTIALS = True
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
