@@ -38,17 +38,24 @@ RUN adduser \
 #     --mount=type=bind,source=requirements.txt,target=requirements.txt \
 #     python -m pip install -r requirements.txt
 
-RUN --mount=type=cache,id=pip-cache,target=/root/.cache/pip \
-    --mount=type=bind,source=requirements.txt,target=requirements.txt \
-    python -m pip install -r requirements.txt
-
-
-# Switch to the non-privileged user to run the application.
-USER appuser
-
-# Copy the source code into the container.
 COPY . .
 
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libpq-dev \
+    && python3 -m ensurepip --upgrade \
+    && python3 -m pip install --upgrade pip \
+    && rm -rf /var/lib/apt/lists/*
+
+
+RUN python3 -m pip install -r requirements.txt && \
+    python3 manage.py collectstatic --noinput && \
+    python3 manage.py migrate
+
+# Copy the source code into the container.
+
+
+USER appuser
 # Expose the port that the application listens on.
 EXPOSE 8000
 
