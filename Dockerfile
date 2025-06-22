@@ -48,9 +48,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 
-RUN python3 -m pip install -r requirements.txt && \
-    python3 manage.py collectstatic --noinput && \
-    python3 manage.py migrate
+RUN python3 -m pip install -r requirements.txt 
 
 # Copy the source code into the container.
 
