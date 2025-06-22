@@ -6,7 +6,7 @@
 
     # Want to help us make this template better? Share your feedback here: https://forms.gle/ybq9Krt8jtBL3iCk7
     # Use PyTorch official image (CPU-only) to save space
-    FROM pytorch/pytorch:2.3.0-cpu-py3.10
+    FROM pytorch/pytorch:2.6.0-cuda11.8-cudnn9-runtime
 
 
     ARG PYTHON_VERSION=3.12.4
