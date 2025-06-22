@@ -38,7 +38,7 @@ RUN adduser \
 #     --mount=type=bind,source=requirements.txt,target=requirements.txt \
 #     python -m pip install -r requirements.txt
 
-RUN --mount=type=cache,target=/root/.cache/pip,id=pip-cache \
+RUN --mount=type=cache,id=pip-cache,target=/root/.cache/pip \
     --mount=type=bind,source=requirements.txt,target=requirements.txt \
     python -m pip install -r requirements.txt
 
